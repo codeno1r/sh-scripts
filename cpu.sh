@@ -9,4 +9,6 @@ case $BLOCK_BUTTON in
 	6) setsid -f "$TERMINAL" -e "$EDITOR" "$0" ;;
 esac
 
-sensors | awk '/Core 0/ {print "🌡" $3}'
+cpu=$(mpstat | awk '/all/ {print 100 - $NF}')
+
+echo "$cpu%"
